@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geretrix | Gestão Financeira Estratégica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.2);
+            --secondary: #6366f1;
+            --danger: #ef4444;
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
+            --border: #1f2937;
+            --accent-gradient: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        .section-padding { padding: 8rem 0; }
+        
+        /* --- BACKGROUND --- */
+        .glow-blob { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%); z-index: -1; filter: blur(100px); opacity: 0.2; }
+        .blob-1 { top: -200px; left: -200px; }
+        .blob-2 { bottom: -200px; right: -200px; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%); }
+
+        /* --- UI COMPONENTS --- */
+        .btn { display: inline-block; padding: 1.1rem 2.2rem; border-radius: 14px; font-weight: 700; text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; border: none; font-size: 1rem; text-align: center; }
+        .btn-primary { background: var(--accent-gradient); color: white; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.5); }
+        .btn-secondary { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-main); }
+        .btn-secondary:hover { background: var(--border); transform: translateY(-2px); }
+
+        .badge { background: var(--primary-glow); color: var(--primary); padding: 0.5rem 1.2rem; border-radius: 99px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid rgba(16, 185, 129, 0.2); display: inline-block; margin-bottom: 2rem; }
+
+        h1 { font-size: 4rem; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1.5px; }
+        h2 { font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        span.gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- NAVBAR --- */
+        nav { padding: 2rem 0; position: absolute; width: 100%; top: 0; z-index: 100; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: #fff; text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        /* --- HERO --- */
+        .hero { padding-top: 14rem; text-align: center; position: relative; }
+        .hero p.subheadline { font-size: 1.3rem; color: var(--text-dim); max-width: 850px; margin: 0 auto 3rem auto; line-height: 1.6; }
+
+        /* --- STATISTICS --- */
+        .stats-section { background: rgba(255,255,255,0.02); border-y: 1px solid var(--border); padding: 5rem 0; }
+        .stats-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+        .stat-large { font-size: 5rem; font-weight: 800; color: var(--danger); line-height: 1; }
+        .stat-source { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; margin-top: 1rem; opacity: 0.6; }
+
+        /* --- PRICING --- */
+        .pricing-section { padding: 8rem 0; background: #080a11; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 4rem; }
+        .price-card { background: var(--card-bg); padding: 3.5rem 2.5rem; border-radius: 28px; border: 1px solid var(--border); text-align: center; transition: all 0.4s; display: flex; flex-direction: column; }
+        .price-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .price-card.featured { border-color: var(--primary); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%); }
+        
+        .price-tag { font-size: 3.5rem; font-weight: 800; color: #fff; margin: 2rem 0; }
+        .price-tag span { font-size: 1.1rem; color: var(--text-dim); font-weight: 400; }
+        
+        .plan-notice { background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 12px; font-size: 0.8rem; color: var(--primary); font-weight: 600; line-height: 1.4; margin-bottom: 2rem; }
+        .plan-notice.urgent { color: #f59e0b; background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.1); }
+        
+        .feature-list { list-style: none; margin: 0 0 3rem 0; text-align: left; flex-grow: 1; }
+        .feature-list li { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; color: var(--text-dim); font-size: 0.95rem; }
+        .feature-list li::before { content: '✓'; color: var(--primary); font-weight: 900; }
+
+        .unavailable { opacity: 0.5; filter: grayscale(0.8); cursor: not-allowed; }
+        .coming-soon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); background: var(--secondary); color: #fff; padding: 0.5rem 1.5rem; border-radius: 8px; font-weight: 800; z-index: 10; pointer-events: none; }
+
+        /* --- INNOVATION MANIFESTO --- */
+        .manifesto { padding: 10rem 0; text-align: center; background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%); }
+        .manifesto-text { font-size: 2.2rem; font-weight: 700; color: #fff; max-width: 900px; margin: 0 auto; line-height: 1.4; font-style: italic; opacity: 0.9; }
+
+        /* --- SIMULATOR --- */
+        .sim-card { background: var(--card-bg); border-radius: 32px; border: 1px solid var(--border); overflow: hidden; margin-top: 4rem; }
+        .sim-grid { display: grid; grid-template-columns: 400px 1fr; }
+        .sim-controls { padding: 3rem; background: #0b0f19; border-right: 1px solid var(--border); }
+        .sim-display { padding: 3rem; background: #0d1117; }
+        .input-group { margin-bottom: 2rem; }
+        .input-group label { display: block; font-size: 0.7rem; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+        .input-group input { width: 100%; background: var(--card-bg); border: 1px solid var(--border); padding: 1.2rem; border-radius: 14px; color: #fff; font-size: 1.1rem; outline: none; transition: border 0.3s; }
+        .input-group input:focus { border-color: var(--primary); }
+
+        .runway-counter { text-align: center; margin-top: 2rem; }
+        .runway-number { font-size: 4rem; font-weight: 800; color: var(--primary); }
+        .runway-label { font-size: 0.8rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; }
+
+        .forecast-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+        .forecast-table th { text-align: left; padding: 1.2rem; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        .forecast-table td { padding: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.9rem; }
+        .status-pill { padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .status-ok { background: rgba(16, 185, 129, 0.1); color: var(--primary); }
+        .status-warn { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        .status-crit { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+        /* --- FOOTER & CONTACT --- */
+        .contact-section { background: var(--card-bg); padding: 8rem 0; border-top: 1px solid var(--border); }
+        .contact-form { max-width: 600px; margin: 3rem auto 0 auto; display: grid; gap: 1.2rem; }
+        .contact-form input, .contact-form textarea { width: 100%; background: #0b0f19; border: 1px solid var(--border); padding: 1.3rem; border-radius: 14px; color: #fff; }
+        
+        footer { padding: 4rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; }
+
+        @media (max-width: 968px) {
+            h1 { font-size: 2.5rem; }
+            .pricing-grid, .sim-grid, .stats-grid { grid-template-columns: 1fr; }
+            .sim-controls { border-right: none; border-bottom: 1px solid var(--border); }
+            .manifesto-text { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">GERE<span>TRIX</span></a>
+            <a href="#contato" class="btn btn-secondary" style="padding: 0.7rem 1.5rem; font-size: 0.85rem;">Diagnóstico Gratuito</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="section-padding hero">
+        <div class="container">
+            <span class="badge">Gestão Estratégica & Preditiva</span>
+            <h1>Não deixe o fluxo de caixa<br><span class="gradient-text">asfixiar a sua empresa</span>.</h1>
+            <p class="subheadline">Na Geretrix, utilizamos Data-Driven Trigger Systems aliados à decisão crítica humana para gerir as suas finanças, de forma a que falta de dinheiro não seja o tormento que leva à falência a sua empresa.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                <a href="#planos" class="btn btn-primary">Ver Planos de Abertura</a>
+                <a href="#simulador" class="btn btn-secondary">Simular Fluxo de Caixa</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- STATISTICS -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div>
+                <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">A Realidade Por Trás dos Números</h2>
+                <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8;">Problemas de fluxo de caixa são o problema nº1 que levam empresas a fechar portas. <span style="color: #fff; font-weight: 700;">82% das PME fecham por essa razão.</span> Muitas das vezes não é por causa do produto ou serviço não ter procura, ou por causa de uma má gestão operacional. Trata-se de uma má gestão das finanças destas empresas e da falta de controlo do seu fluxo de caixa, que levam à sua falência.</p>
+                <p class="stat-source">Fonte: Estudo U.S. Bank & Small Business Administration (SBA)</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-large">82%</div>
+                <p style="color: var(--text-dim); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Taxa de Falência por Problemas de Fluxo de Caixa</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RUNWAY SIMULATOR -->
+    <section id="simulador" class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <span class="badge">Ferramenta de Diagnóstico</span>
+                <h2>Deixe os números da sua empresa contar-lhe as suas histórias</h2>
+                <p style="color: var(--text-dim);">Entenda exatamente como o seu dinheiro desaparece mês a mês.</p>
+            </div>
+
+            <div class="sim-card">
+                <div class="sim-grid">
+                    <div class="sim-controls">
+                        <div class="input-group">
+                            <label>Saldo Inicial (€)</label>
+                            <input type="number" id="cash" value="80000" oninput="runSimulation()">
+                        </div>
+                        <div class="input-group">
+                            <label>Receita Mensal (€)</label>
+                            <input type="number" id="revenue" value="12000" oninput="runSimulation()">
+                        </div>
+                        <div class="input-group">
+                            <label>Custos Mensais (€)</label>
+                            <input type="number" id="burn" value="22000" oninput="runSimulation()">
+                        </div>
+                        <div class="runway-counter">
+                            <div class="runway-label">Runway Atual</div>
+                            <div class="runway-number" id="runway-val">8.0</div>
+                            <div class="runway-label">Meses de Vida</div>
+                        </div>
+                    </div>
+                    <div class="sim-display">
+                        <div style="font-weight: 800; color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 1.5rem;">PROJEÇÃO DE FLUXO DE CAIXA</div>
+                        <div style="max-height: 450px; overflow-y: auto;">
+                            <table class="forecast-table">
+                                <thead>
+                                    <tr>
+                                        <th>Mês</th>
+                                        <th>Burn Net</th>
+                                        <th>Saldo Final</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sim-body">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING PLANS -->
+    <section id="planos" class="pricing-section">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2>Soluções para a sua empresa</h2>
+                <p style="color: var(--text-dim); font-size: 1.2rem;">O problema de cash-flow que pretendemos resolver é real e verifica-se numa grande quantidade de empresas. <span style="color: #fff; font-weight: 700;">Deixe-nos ajudá-lo.</span></p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- START -->
+                <div class="price-card featured">
+                    <div class="plan-notice urgent">Acaba brevemente. Última oportunidade de ter acesso ao serviço pelo preço de abertura, usufruindo de todos os restantes serviços do plano Scale pelo preço do plano Start, quando este for lançado.</div>
+                    <h3>Start</h3>
+                    <p style="color: var(--text-dim); font-size: 0.85rem;">Pre-seed & Seed</p>
+                    <div class="price-tag">799€<span>/mês</span></div>
+                    <ul class="feature-list">
+                        <li style="color: #fff; font-weight: 700;">Módulo DLI (Liquidez) Ativo</li>
+                        <li>Gestão Preditiva de Tesouraria</li>
+                        <li>Trigger System Data-Driven</li>
+                        <li>Dashboards de Decisão em Tempo Real</li>
+                        <li>Acompanhamento de Especialista</li>
+                    </ul>
+                    <a href="#contato" class="btn btn-primary">Garantir Preço de Abertura</a>
+                </div>
+
+                <!-- SCALE -->
+                <div class="price-card unavailable">
+                    <div class="coming-soon">ABRE BREVEMENTE</div>
+                    <h3>Scale</h3>
+                    <p style="color: var(--text-dim); font-size: 0.85rem;">Series A & Growth</p>
+                    <div class="price-tag">1850€<span>/mês</span></div>
+                    <ul class="feature-list">
+			<li>Módulo DLI (gestão diária do fluxo de caixa)</li>
+                        <li>Protocolo SSS (Corte de Custos)</li>
+                        <li>CFO Estratégico Tech-Enabled</li>
+                        <li>Módulo NCS (Fundos Não Dilutivos)</li>
+                        <li>Due Diligence Automatizada</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Em Breve</a>
+                </div>
+
+                <!-- PARTNER -->
+                <div class="price-card">
+                    <h3>Equity Partner</h3>
+                    <p style="color: var(--text-dim); font-size: 0.85rem;">High Impact Startups</p>
+                    <div class="price-tag">Equity<span>/Success</span></div>
+                    <ul class="feature-list">
+                        <li>Uma forma de acesso à totalidade dos nossos serviços para empresas em fases iniciais, com poucas margens financeiras e com um grande potencial de crescimento, realizando-se o pagamento de uma subscrição base bastante mais baixa (a estipular), através da transferência de uma pequena parcela do capital social da empresa (também a estipular) para o nome da nossa sociedade</li>
+                        <li>Alinhamento Total de Interesses</li>
+                    </ul>
+                    <a href="#contato" class="btn btn-secondary">Candidatar Startup</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto">
+        <div class="container">
+            <p class="manifesto-text">"A inovação do nosso serviço não se encontra no serviço que prestamos, mas sim no nosso modelo de entrega. A forma como entregamos esta solução é a inovação que os empreendedores precisam, e que nós estamos dispostos a entregar."</p>
+        </div>
+    </section>
+
+    <!-- CONTACT / DIAGNOSIS -->
+    <section id="contato" class="contact-section">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="badge">Ação Imediata</span>
+                <h2>Faça já o Diagnóstico Financeiro da sua Empresa</h2>
+                <p style="color: var(--text-dim);">Agende uma conversa de 15 minutos e descubra as vulnerabilidades financeira da sua empresa.</p>
+                
+                <form class="contact-form">
+                    <input type="text" placeholder="Nome Completo" required>
+                    <input type="email" placeholder="E-mail Profissional" required>
+                    <input type="text" placeholder="Nome da Empresa / Startup" required>
+                    <textarea rows="4" placeholder="Qual o maior desafio do seu fluxo de caixa hoje?"></textarea>
+                    <button type="submit" class="btn btn-primary">Solicitar Diagnóstico Gratuito</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 2rem;">GERE<span>TRIX</span></div>
+            <p>&copy; 2026 Geretrix. Todos os direitos reservados. Gestão Financeira para Empreendedores.</p>
+        </div>
+    </footer>
+
+    <script>
+function runSimulation() {
+    // 1. Capturar os elementos do HTML de forma segura
+    const cashInput = document.getElementById('cash');
+    const revenueInput = document.getElementById('revenue');
+    const burnInput = document.getElementById('burn');
+    const runwayValField = document.getElementById('runway-val');
+    const simBody = document.getElementById('sim-body');
+
+    // Se os elementos estruturais não existirem, para a execução para não dar erro
+    if (!cashInput || !revenueInput || !burnInput || !simBody) return;
+
+    // 2. Converter os inputs em valores numéricos decimais
+    const cash = parseFloat(cashInput.value) || 0;
+    const revenue = parseFloat(revenueInput.value) || 0;
+    const burn = parseFloat(burnInput.value) || 0;
+
+    // Calcular o Burn Net Mensal (Custos menos as Receitas)
+    const monthlyNet = burn - revenue;
+
+    // 3. Atualizar o indicador gigante de Runway do topo do painel
+    if (monthlyNet > 0) {
+        const globalRunway = cash / monthlyNet;
+        if (runwayValField) runwayValField.innerText = globalRunway.toFixed(1);
+    } else {
+        if (runwayValField) runwayValField.innerText = "Infinito";
+    }
+
+    // 4. Limpar o corpo da tabela antes de injetar os novos cálculos
+    simBody.innerHTML = '';
+    let currentBalance = cash;
+
+    // 5. Correr a simulação contínua para os próximos 12 meses
+    for (let m = 1; m <= 12; m++) {
+        currentBalance -= monthlyNet;
+
+        let statusText = '';
+        let statusStyle = '';
+
+        // [REGRA 4] Se o saldo entrar em terreno negativo -> INSOLVÊNCIA a fundo cinzento
+        if (currentBalance < 0) {
+            statusText = 'INSOLVÊNCIA';
+            statusStyle = 'background-color: #4b5563; color: #f3f4f6; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px; display: inline-block; min-width: 140px; text-align: center; text-transform: uppercase;';
+        } else {
+            // Calcular a saúde de runway específica deste mês respetivo
+            let monthlyRunway = monthlyNet > 0 ? (currentBalance / monthlyNet) : 99;
+
+            // [REGRA 1] 7 ou mais meses restantes -> OPERAÇÃO NORMAL a fundo verde
+            if (monthlyRunway >= 7) {
+                statusText = 'OPERAÇÃO NORMAL';
+                statusStyle = 'background-color: #10b981; color: #ffffff; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px; display: inline-block; min-width: 140px; text-align: center; text-transform: uppercase;';
+            } 
+            // [REGRA 2] Entre 3 e 6.99 meses restantes -> PLANO DE CRISE a fundo amarelo
+            else if (monthlyRunway >= 3) {
+                statusText = 'PLANO DE PREVENÇÃO';
+                statusStyle = 'background-color: #f59e0b; color: #ffffff; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px; display: inline-block; min-width: 140px; text-align: center; text-transform: uppercase;';
+            } 
+            // [REGRA 3] Menos de 3 meses (2.99 para baixo) -> PLANO DE CRISE a fundo vermelho
+            else {
+                statusText = 'PLANO DE CRISE';
+                statusStyle = 'background-color: #ef4444; color: #ffffff; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px; display: inline-block; min-width: 140px; text-align: center; text-transform: uppercase;';
+            }
+        }
+
+        // Formatação visual de strings financeiras (com separadores de milhares)
+        let burnNetDisplay = monthlyNet > 0 ? `-€${monthlyNet.toLocaleString()}` : `+€${Math.abs(monthlyNet).toLocaleString()}`;
+        let balanceDisplay = currentBalance < 0 ? `-€${Math.abs(currentBalance).toLocaleString()}` : `€${currentBalance.toLocaleString()}`;
+
+        // Injetar a linha estruturada na tabela seguindo o design do teu dashboard
+        simBody.innerHTML += `
+            <tr style="border-b: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 14px 8px; color: #94a3b8;">Mês ${m}</td>
+                <td style="padding: 14px 8px; color: ${monthlyNet > 0 ? '#f87171' : '#34d399'}; font-weight: 500;">${burnNetDisplay}</td>
+                <td style="padding: 14px 8px; color: #f1f5f9; font-weight: 500;">${balanceDisplay}</td>
+                <td style="padding: 14px 8px;"><span style="${statusStyle}">${statusText}</span></td>
+            </tr>
+        `;
+    }
+}
+
+// Mapeamento duplo para garantir que o código roda com qualquer um dos nomes chamados no HTML
+const calculate = runSimulation;
+
+// Inicializar automaticamente o simulador assim que a página abre
+window.onload = runSimulation;
+</script>
+</body>
+</html>

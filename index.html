@@ -298,10 +298,10 @@
                 <p style="color: var(--text-dim);">Agende uma conversa de 15 minutos e descubra as vulnerabilidades financeira da sua empresa.</p>
                 
                 <form class="contact-form">
-                    <input type="text" placeholder="Nome Completo" required>
-                    <input type="email" placeholder="E-mail Profissional" required>
-                    <input type="text" placeholder="Nome da Empresa / Startup" required>
-                    <textarea rows="4" placeholder="Qual o maior desafio do seu fluxo de caixa hoje?"></textarea>
+                    <input type="text" name="Nome" placeholder="Nome Completo" required>
+                    <input type="email" name="E-mail" placeholder="E-mail Profissional" required>
+                    <input type="text" name="Empresa" placeholder="Nome da Empresa / Startup" required>
+                    <textarea name="Desafio" rows="4" placeholder="Qual o maior desafio do seu fluxo de caixa hoje?"></textarea>
                     <button type="submit" class="btn btn-primary">Solicitar Diagnóstico Gratuito</button>
                 </form>
             </div>
@@ -400,6 +400,64 @@ const calculate = runSimulation;
 
 // Inicializar automaticamente o simulador assim que a página abre
 window.onload = runSimulation;
+
+// Envio do formulário de contacto por e-mail (FormSubmit AJAX)
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn ? submitBtn.innerText : "Solicitar Diagnóstico Gratuito";
+            
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "A enviar...";
+            }
+            
+            const formData = new FormData(contactForm);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Configurações personalizadas para o FormSubmit
+            data['_subject'] = 'Novo Diagnóstico Solicitado - Geretrix';
+            data['_captcha'] = 'false';
+
+            fetch('https://formsubmit.co/ajax/joaomcmonteiro7@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro no envio');
+                }
+            })
+            .then(resData => {
+                alert('Solicitação enviada com sucesso! Entraremos em contacto em breve.');
+                contactForm.reset();
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                alert('Ocorreu um erro ao enviar a sua solicitação. Por favor, tente novamente.');
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                }
+            });
+        });
+    }
+});
 </script>
 </body>
 </html>

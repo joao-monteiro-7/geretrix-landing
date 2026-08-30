@@ -57,10 +57,105 @@
         span.gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* --- NAVBAR --- */
-        nav { padding: 2rem 0; position: absolute; width: 100%; top: 0; z-index: 100; }
+        nav { 
+            padding: 2rem 0; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 100; 
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
+            background-color: transparent;
+        }
+        nav.sticky {
+            background-color: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+        nav.scroll-down {
+            transform: translateY(-100%);
+        }
+        nav.scroll-up {
+            transform: translateY(0);
+        }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: #fff; text-decoration: none; }
         .logo span { color: var(--primary); }
+
+        /* --- REVEAL ON SCROLL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .faq-item:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 2rem;
+            text-align: left;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: color 0.3s;
+        }
+        .faq-question:hover {
+            color: var(--primary);
+        }
+        .faq-icon {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-dim);
+            transition: transform 0.3s ease, color 0.3s;
+        }
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+            color: var(--primary);
+        }
+        .faq-item.open {
+            border-color: var(--primary);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), padding 0.3s ease;
+            padding: 0 2rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .faq-item.open .faq-answer {
+            padding-bottom: 1.5rem;
+        }
 
         /* --- HERO --- */
         .hero { padding-top: 14rem; text-align: center; position: relative; }
@@ -159,7 +254,7 @@
     </header>
 
     <!-- STATISTICS -->
-    <section class="stats-section">
+    <section class="stats-section reveal">
         <div class="container stats-grid">
             <div>
                 <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">A Realidade Por Trás dos Números</h2>
@@ -176,13 +271,13 @@
     <!-- RUNWAY SIMULATOR -->
     <section id="simulador" class="section-padding">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 4rem;">
+            <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
                 <span class="badge">Ferramenta de Diagnóstico</span>
                 <h2>Deixe os números da sua empresa contar-lhe as suas histórias</h2>
                 <p style="color: var(--text-dim);">Entenda exatamente como o seu dinheiro desaparece mês a mês.</p>
             </div>
 
-            <div class="sim-card">
+            <div class="sim-card reveal">
                 <div class="sim-grid">
                     <div class="sim-controls">
                         <div class="input-group">
@@ -229,14 +324,14 @@
     <!-- PRICING PLANS -->
     <section id="planos" class="pricing-section">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 4rem;">
+            <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
                 <h2>Soluções para a sua empresa</h2>
                 <p style="color: var(--text-dim); font-size: 1.2rem;">O problema de cash-flow que pretendemos resolver é real e verifica-se numa grande quantidade de empresas. <span style="color: #fff; font-weight: 700;">Deixe-nos ajudá-lo.</span></p>
             </div>
 
             <div class="pricing-grid">
                 <!-- START -->
-                <div class="price-card featured">
+                <div class="price-card featured reveal">
                     <div class="plan-notice urgent">Acaba brevemente. Última oportunidade de ter acesso ao serviço pelo preço de abertura, usufruindo de todos os restantes serviços do plano Scale pelo preço do plano Start, quando este for lançado.</div>
                     <h3>Start</h3>
                     <p style="color: var(--text-dim); font-size: 0.85rem;">Pre-seed & Seed</p>
@@ -252,7 +347,7 @@
                 </div>
 
                 <!-- SCALE -->
-                <div class="price-card unavailable">
+                <div class="price-card unavailable reveal">
                     <div class="coming-soon">ABRE BREVEMENTE</div>
                     <h3>Scale</h3>
                     <p style="color: var(--text-dim); font-size: 0.85rem;">Series A & Growth</p>
@@ -268,7 +363,7 @@
                 </div>
 
                 <!-- PARTNER -->
-                <div class="price-card">
+                <div class="price-card reveal">
                     <h3>Equity Partner</h3>
                     <p style="color: var(--text-dim); font-size: 0.85rem;">High Impact Startups</p>
                     <div class="price-tag">Equity<span>/Success</span></div>
@@ -283,16 +378,79 @@
     </section>
 
     <!-- MANIFESTO -->
-    <section class="manifesto">
+    <section class="manifesto reveal">
         <div class="container">
             <p class="manifesto-text">"A inovação do nosso serviço não se encontra no serviço que prestamos, mas sim no nosso modelo de entrega. A forma como entregamos esta solução é a inovação que os empreendedores precisam, e que nós estamos dispostos a entregar."</p>
+        </div>
+    </section>
+
+    <!-- FAQS SECTION -->
+    <section id="faq" class="section-padding reveal" style="border-top: 1px solid var(--border); background: #080a11;">
+        <div class="container" style="max-width: 800px;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <span class="badge">Dúvidas Frequentes</span>
+                <h2>Perguntas Frequentes</h2>
+                <p style="color: var(--text-dim);">Tudo o que precisa de saber sobre o nosso modelo e funcionamento.</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Como é que a Geretrix previne a falta de liquidez na minha empresa?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Utilizamos sistemas de gatilhos orientados por dados (Data-Driven Trigger Systems) que analisam em tempo real o fluxo de caixa, as faturas e os prazos de recebimento, alertando-o antes que os problemas de liquidez aconteçam.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Preciso de mudar o meu software de faturação atual?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Não, os nossos sistemas integram-se diretamente com os principais softwares do mercado através de APIs robustas ou importação segura, sem interromper as suas operações diárias.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>O que é o Módulo DLI (Liquidez) incluído no plano Start?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O Módulo DLI é a nossa tecnologia proprietária para o controlo diário e projeção contínua do fluxo de caixa. Permite monitorizar entradas e saídas futuras e tomar decisões estratégicas com base em dados preditivos concretos.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Como funciona o plano Equity Partner para startups?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Para startups com alto potencial mas pouca liquidez inicial, oferecemos acesso total ao nosso ecossistema reduzindo substancialmente a mensalidade em troca de uma pequena percentagem de capital social (equity) da empresa.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Tenho apoio de especialistas reais ou apenas de software?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Acreditamos na combinação perfeita entre tecnologia e inteligência humana. Terá acesso aos nossos dashboards automatizados, mas sempre com o acompanhamento e análise crítica de um especialista financeiro dedicado.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- CONTACT / DIAGNOSIS -->
     <section id="contato" class="contact-section">
         <div class="container">
-            <div style="text-align: center;">
+            <div class="reveal" style="text-align: center;">
                 <span class="badge">Ação Imediata</span>
                 <h2>Faça já o Diagnóstico Financeiro da sua Empresa</h2>
                 <p style="color: var(--text-dim);">Agende uma conversa de 15 minutos e descubra as vulnerabilidades financeira da sua empresa.</p>
@@ -401,8 +559,95 @@ const calculate = runSimulation;
 // Inicializar automaticamente o simulador assim que a página abre
 window.onload = runSimulation;
 
-// Envio do formulário de contacto por e-mail (FormSubmit AJAX)
+// Envio do formulário de contacto por e-mail (FormSubmit AJAX) e outras funcionalidades interativas
 document.addEventListener('DOMContentLoaded', function() {
+    // --- SMART STICKY HEADER ---
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('nav');
+    const scrollThreshold = 10; // min scroll amount to trigger hide/show
+
+    window.addEventListener('scroll', function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Aplicar estilo de sticky quando faz scroll para baixo
+        if (scrollTop > 50) {
+            navbar.classList.add('sticky');
+        } else {
+            navbar.classList.remove('sticky');
+        }
+
+        // Evitar triggers desnecessários em pequenos desvios de scroll
+        if (Math.abs(lastScrollTop - scrollTop) <= scrollThreshold) {
+            return;
+        }
+
+        if (scrollTop > lastScrollTop && scrollTop > 150) {
+            // Scroll para baixo -> Esconder Navbar
+            navbar.classList.add('scroll-down');
+            navbar.classList.remove('scroll-up');
+        } else {
+            // Scroll para cima -> Mostrar Navbar
+            navbar.classList.remove('scroll-down');
+            navbar.classList.add('scroll-up');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+
+    // --- REVEAL ON SCROLL ---
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // "One-time" scroll behavior
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(function(element) {
+            revealObserver.observe(element);
+        });
+    } else {
+        // Fallback para browsers antigos sem Intersection Observer
+        revealElements.forEach(function(element) {
+            element.classList.add('active');
+        });
+    }
+
+    // --- FAQS ACCORDION ---
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(function(question) {
+        question.addEventListener('click', function() {
+            const faqItem = question.parentElement;
+            const faqAnswer = faqItem.querySelector('.faq-answer');
+            const isOpen = faqItem.classList.contains('open');
+            
+            // Fechar todas as outras perguntas para efeito de acordeão limpo
+            document.querySelectorAll('.faq-item').forEach(function(item) {
+                if (item !== faqItem) {
+                    item.classList.remove('open');
+                    const answer = item.querySelector('.faq-answer');
+                    if (answer) answer.style.maxHeight = null;
+                }
+            });
+
+            if (isOpen) {
+                faqItem.classList.remove('open');
+                faqAnswer.style.maxHeight = null;
+            } else {
+                faqItem.classList.add('open');
+                faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+            }
+        });
+    });
+
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -426,7 +671,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data['_subject'] = 'Novo Diagnóstico Solicitado - Geretrix';
             data['_captcha'] = 'false';
 
-            fetch('https://formsubmit.co/ajax/joaomcmonteiro7@gmail.com', {
+            fetch('https://formsubmit.co/069cb224e08201e5b3f33b0a5281f7ba', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

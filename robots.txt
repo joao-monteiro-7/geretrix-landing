@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joao-monteiro-7.github.io/geretrix-landing/sitemap.xml

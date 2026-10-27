@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geretrix | Gestão Financeira Estratégica</title>
+    <meta name="description" content="Na Geretrix, utilizamos Data-Driven Trigger Systems aliados à decisão crítica humana para gerir as suas finanças e proteger o fluxo de caixa da sua empresa.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://joao-monteiro-7.github.io/geretrix-landing/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0f19'/><text x='50' y='84.5' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='96' fill='%2310b981'>G</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0f19'/><text x='50' y='84.5' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='96' fill='%2310b981'>G</text></svg>">
+
+    <!-- Open Graph / Partilha Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="Geretrix">
+    <meta property="og:url" content="https://joao-monteiro-7.github.io/geretrix-landing/">
+    <meta property="og:title" content="Geretrix | Gestão Financeira Estratégica">
+    <meta property="og:description" content="Não deixe o fluxo de caixa asfixiar a sua empresa. Utilize Data-Driven Trigger Systems aliados à decisão crítica humana para proteger a sua liquidez.">
+    <meta property="og:image" content="https://joao-monteiro-7.github.io/geretrix-landing/og-image.png">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Geretrix | Gestão Financeira Estratégica">
+    <meta name="twitter:description" content="Não deixe o fluxo de caixa asfixiar a sua empresa. Gestão preditiva de tesouraria e controlo de liquidez para PME e Startups.">
+    <meta name="twitter:image" content="https://joao-monteiro-7.github.io/geretrix-landing/og-image.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -160,9 +183,10 @@
         /* --- HERO --- */
         .hero { padding-top: 14rem; text-align: center; position: relative; }
         .hero p.subheadline { font-size: 1.3rem; color: var(--text-dim); max-width: 850px; margin: 0 auto 3rem auto; line-height: 1.6; }
+        .hero-actions { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
         /* --- STATISTICS --- */
-        .stats-section { background: rgba(255,255,255,0.02); border-y: 1px solid var(--border); padding: 5rem 0; }
+        .stats-section { background: rgba(255,255,255,0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 0; }
         .stats-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
         .stat-large { font-size: 5rem; font-weight: 800; color: var(--danger); line-height: 1; }
         .stat-source { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; margin-top: 1rem; opacity: 0.6; }
@@ -170,7 +194,7 @@
         /* --- PRICING --- */
         .pricing-section { padding: 8rem 0; background: #080a11; }
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 4rem; }
-        .price-card { background: var(--card-bg); padding: 3.5rem 2.5rem; border-radius: 28px; border: 1px solid var(--border); text-align: center; transition: all 0.4s; display: flex; flex-direction: column; }
+        .price-card { position: relative; background: var(--card-bg); padding: 3.5rem 2.5rem; border-radius: 28px; border: 1px solid var(--border); text-align: center; transition: all 0.4s; display: flex; flex-direction: column; }
         .price-card:hover { border-color: var(--primary); transform: translateY(-5px); }
         .price-card.featured { border-color: var(--primary); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%); }
         
@@ -184,7 +208,7 @@
         .feature-list li { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; color: var(--text-dim); font-size: 0.95rem; }
         .feature-list li::before { content: '✓'; color: var(--primary); font-weight: 900; }
 
-        .unavailable { opacity: 0.5; filter: grayscale(0.8); cursor: not-allowed; }
+        .unavailable { opacity: 0.5; filter: grayscale(0.8); cursor: not-allowed; pointer-events: none; user-select: none; }
         .coming-soon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); background: var(--secondary); color: #fff; padding: 0.5rem 1.5rem; border-radius: 8px; font-weight: 800; z-index: 10; pointer-events: none; }
 
         /* --- INNOVATION MANIFESTO --- */
@@ -216,15 +240,76 @@
         /* --- FOOTER & CONTACT --- */
         .contact-section { background: var(--card-bg); padding: 8rem 0; border-top: 1px solid var(--border); }
         .contact-form { max-width: 600px; margin: 3rem auto 0 auto; display: grid; gap: 1.2rem; }
-        .contact-form input, .contact-form textarea { width: 100%; background: #0b0f19; border: 1px solid var(--border); padding: 1.3rem; border-radius: 14px; color: #fff; }
+        .contact-form input, .contact-form textarea { width: 100%; background: #0b0f19; border: 1px solid var(--border); padding: 1.3rem; border-radius: 14px; color: #fff; outline: none; transition: border 0.3s; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); }
         
         footer { padding: 4rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; }
+
+        /* --- COOKIE CONSENT BANNER --- */
+        .cookie-banner {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(150%);
+            width: calc(100% - 2rem);
+            max-width: 900px;
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            z-index: 999;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .cookie-banner.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .cookie-text {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .cookie-text a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        .cookie-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+        .btn-cookie {
+            padding: 0.7rem 1.3rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        .btn-cookie-accept {
+            background: var(--accent-gradient);
+            color: #fff;
+        }
+        .btn-cookie-reject {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
 
         @media (max-width: 968px) {
             h1 { font-size: 2.5rem; }
             .pricing-grid, .sim-grid, .stats-grid { grid-template-columns: 1fr; }
             .sim-controls { border-right: none; border-bottom: 1px solid var(--border); }
             .manifesto-text { font-size: 1.5rem; }
+            .cookie-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 1.2rem; }
+            .cookie-actions { justify-content: center; }
         }
     </style>
 </head>
@@ -233,249 +318,262 @@
     <div class="glow-blob blob-1"></div>
     <div class="glow-blob blob-2"></div>
 
-    <nav>
+    <nav aria-label="Navegação Principal">
         <div class="container nav-content">
             <a href="#" class="logo">GERE<span>TRIX</span></a>
             <a href="#contato" class="btn btn-secondary" style="padding: 0.7rem 1.5rem; font-size: 0.85rem;">Diagnóstico Gratuito</a>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <header class="section-padding hero">
-        <div class="container">
-            <span class="badge">Gestão Estratégica & Preditiva</span>
-            <h1>Não deixe o fluxo de caixa<br><span class="gradient-text">asfixiar a sua empresa</span>.</h1>
-            <p class="subheadline">Na Geretrix, utilizamos Data-Driven Trigger Systems aliados à decisão crítica humana para gerir as suas finanças, de forma a que falta de dinheiro não seja o tormento que leva à falência a sua empresa.</p>
-            <div style="display: flex; gap: 1.5rem; justify-content: center;">
-                <a href="#planos" class="btn btn-primary">Ver Planos de Abertura</a>
-                <a href="#simulador" class="btn btn-secondary">Simular Fluxo de Caixa</a>
+    <main>
+        <!-- HERO -->
+        <header class="section-padding hero">
+            <div class="container">
+                <span class="badge">Gestão Estratégica & Preditiva</span>
+                <h1>Não deixe o fluxo de caixa<br><span class="gradient-text">asfixiar a sua empresa</span>.</h1>
+                <p class="subheadline">Na Geretrix, utilizamos Data-Driven Trigger Systems aliados à decisão crítica humana para gerir as suas finanças, de forma a que falta de dinheiro não seja o tormento que leva à falência a sua empresa.</p>
+                <div class="hero-actions">
+                    <a href="#planos" class="btn btn-primary">Ver Planos de Abertura</a>
+                    <a href="#simulador" class="btn btn-secondary">Simular Fluxo de Caixa</a>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- STATISTICS -->
-    <section class="stats-section reveal">
-        <div class="container stats-grid">
-            <div>
-                <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">A Realidade Por Trás dos Números</h2>
-                <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8;">Problemas de fluxo de caixa são o problema nº1 que levam empresas a fechar portas. <span style="color: #fff; font-weight: 700;">82% das PME fecham por essa razão.</span> Muitas das vezes não é por causa do produto ou serviço não ter procura, ou por causa de uma má gestão operacional. Trata-se de uma má gestão das finanças destas empresas e da falta de controlo do seu fluxo de caixa, que levam à sua falência.</p>
-                <p class="stat-source">Fonte: Estudo U.S. Bank & Small Business Administration (SBA)</p>
+        <!-- STATISTICS -->
+        <section class="stats-section reveal">
+            <div class="container stats-grid">
+                <div>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 2rem;">A Realidade Por Trás dos Números</h2>
+                    <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8;">Problemas de fluxo de caixa são o problema nº1 que levam empresas a fechar portas. <span style="color: #fff; font-weight: 700;">82% das PME fecham por essa razão.</span> Muitas das vezes não é por causa do produto ou serviço não ter procura, ou por causa de uma má gestão operacional. Trata-se de uma má gestão das finanças destas empresas e da falta de controlo do seu fluxo de caixa, que levam à sua falência.</p>
+                    <p class="stat-source">Fonte: Estudo U.S. Bank & Small Business Administration (SBA)</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="stat-large">82%</div>
+                    <p style="color: var(--text-dim); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Taxa de Falência por Problemas de Fluxo de Caixa</p>
+                </div>
             </div>
-            <div style="text-align: center;">
-                <div class="stat-large">82%</div>
-                <p style="color: var(--text-dim); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Taxa de Falência por Problemas de Fluxo de Caixa</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- RUNWAY SIMULATOR -->
-    <section id="simulador" class="section-padding">
-        <div class="container">
-            <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
-                <span class="badge">Ferramenta de Diagnóstico</span>
-                <h2>Deixe os números da sua empresa contar-lhe as suas histórias</h2>
-                <p style="color: var(--text-dim);">Entenda exatamente como o seu dinheiro desaparece mês a mês.</p>
-            </div>
+        <!-- RUNWAY SIMULATOR -->
+        <section id="simulador" class="section-padding">
+            <div class="container">
+                <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
+                    <span class="badge">Ferramenta de Diagnóstico</span>
+                    <h2>Deixe os números da sua empresa contar-lhe as suas histórias</h2>
+                    <p style="color: var(--text-dim);">Entenda exatamente como o seu dinheiro desaparece mês a mês.</p>
+                </div>
 
-            <div class="sim-card reveal">
-                <div class="sim-grid">
-                    <div class="sim-controls">
-                        <div class="input-group">
-                            <label>Saldo Inicial (€)</label>
-                            <input type="number" id="cash" value="80000" oninput="runSimulation()">
+                <div class="sim-card reveal">
+                    <div class="sim-grid">
+                        <div class="sim-controls">
+                            <div class="input-group">
+                                <label for="cash">Saldo Inicial (€)</label>
+                                <input type="number" id="cash" value="80000" min="0" oninput="runSimulation()">
+                            </div>
+                            <div class="input-group">
+                                <label for="revenue">Receita Mensal (€)</label>
+                                <input type="number" id="revenue" value="12000" min="0" oninput="runSimulation()">
+                            </div>
+                            <div class="input-group">
+                                <label for="burn">Custos Mensais (€)</label>
+                                <input type="number" id="burn" value="22000" min="0" oninput="runSimulation()">
+                            </div>
+                            <div class="runway-counter" aria-live="polite">
+                                <div class="runway-label">Runway Atual</div>
+                                <div class="runway-number" id="runway-val">8.0</div>
+                                <div class="runway-label">Meses de Vida</div>
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label>Receita Mensal (€)</label>
-                            <input type="number" id="revenue" value="12000" oninput="runSimulation()">
-                        </div>
-                        <div class="input-group">
-                            <label>Custos Mensais (€)</label>
-                            <input type="number" id="burn" value="22000" oninput="runSimulation()">
-                        </div>
-                        <div class="runway-counter">
-                            <div class="runway-label">Runway Atual</div>
-                            <div class="runway-number" id="runway-val">8.0</div>
-                            <div class="runway-label">Meses de Vida</div>
-                        </div>
-                    </div>
-                    <div class="sim-display">
-                        <div style="font-weight: 800; color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 1.5rem;">PROJEÇÃO DE FLUXO DE CAIXA</div>
-                        <div style="max-height: 450px; overflow-y: auto;">
-                            <table class="forecast-table">
-                                <thead>
-                                    <tr>
-                                        <th>Mês</th>
-                                        <th>Burn Net</th>
-                                        <th>Saldo Final</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sim-body">
-                                    <!-- Dynamic rows -->
-                                </tbody>
-                            </table>
+                        <div class="sim-display">
+                            <div style="font-weight: 800; color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 1.5rem;">PROJEÇÃO DE FLUXO DE CAIXA</div>
+                            <div style="max-height: 450px; overflow-y: auto;">
+                                <table class="forecast-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Mês</th>
+                                            <th scope="col">Burn Net</th>
+                                            <th scope="col">Saldo Final</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sim-body">
+                                        <!-- Dynamic rows -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- PRICING PLANS -->
-    <section id="planos" class="pricing-section">
-        <div class="container">
-            <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
-                <h2>Soluções para a sua empresa</h2>
-                <p style="color: var(--text-dim); font-size: 1.2rem;">O problema de cash-flow que pretendemos resolver é real e verifica-se numa grande quantidade de empresas. <span style="color: #fff; font-weight: 700;">Deixe-nos ajudá-lo.</span></p>
-            </div>
-
-            <div class="pricing-grid">
-                <!-- START -->
-                <div class="price-card featured reveal">
-                    <div class="plan-notice urgent">Acaba brevemente. Última oportunidade de ter acesso ao serviço pelo preço de abertura, usufruindo de todos os restantes serviços do plano Scale pelo preço do plano Start, quando este for lançado.</div>
-                    <h3>Start</h3>
-                    <p style="color: var(--text-dim); font-size: 0.85rem;">Pre-seed & Seed</p>
-                    <div class="price-tag">799€<span>/mês</span></div>
-                    <ul class="feature-list">
-                        <li style="color: #fff; font-weight: 700;">Módulo DLI (Liquidez) Ativo</li>
-                        <li>Gestão Preditiva de Tesouraria</li>
-                        <li>Trigger System Data-Driven</li>
-                        <li>Dashboards de Decisão em Tempo Real</li>
-                        <li>Acompanhamento de Especialista</li>
-                    </ul>
-                    <a href="#contato" class="btn btn-primary">Garantir Preço de Abertura</a>
+        <!-- PRICING PLANS -->
+        <section id="planos" class="pricing-section">
+            <div class="container">
+                <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
+                    <h2>Soluções para a sua empresa</h2>
+                    <p style="color: var(--text-dim); font-size: 1.2rem;">O problema de cash-flow que pretendemos resolver é real e verifica-se numa grande quantidade de empresas. <span style="color: #fff; font-weight: 700;">Deixe-nos ajudá-lo.</span></p>
                 </div>
 
-                <!-- SCALE -->
-                <div class="price-card unavailable reveal">
-                    <div class="coming-soon">ABRE BREVEMENTE</div>
-                    <h3>Scale</h3>
-                    <p style="color: var(--text-dim); font-size: 0.85rem;">Series A & Growth</p>
-                    <div class="price-tag">1850€<span>/mês</span></div>
-                    <ul class="feature-list">
-			<li>Módulo DLI (gestão diária do fluxo de caixa)</li>
-                        <li>Protocolo SSS (Corte de Custos)</li>
-                        <li>CFO Estratégico Tech-Enabled</li>
-                        <li>Módulo NCS (Fundos Não Dilutivos)</li>
-                        <li>Due Diligence Automatizada</li>
-                    </ul>
-                    <a href="#" class="btn btn-secondary">Em Breve</a>
-                </div>
-
-                <!-- PARTNER -->
-                <div class="price-card reveal">
-                    <h3>Equity Partner</h3>
-                    <p style="color: var(--text-dim); font-size: 0.85rem;">High Impact Startups</p>
-                    <div class="price-tag">Equity<span>/Success</span></div>
-                    <ul class="feature-list">
-                        <li>Uma forma de acesso à totalidade dos nossos serviços para empresas em fases iniciais, com poucas margens financeiras e com um grande potencial de crescimento, realizando-se o pagamento de uma subscrição base bastante mais baixa (a estipular), através da transferência de uma pequena parcela do capital social da empresa (também a estipular) para o nome da nossa sociedade</li>
-                        <li>Alinhamento Total de Interesses</li>
-                    </ul>
-                    <a href="#contato" class="btn btn-secondary">Candidatar Startup</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MANIFESTO -->
-    <section class="manifesto reveal">
-        <div class="container">
-            <p class="manifesto-text">"A inovação do nosso serviço não se encontra no serviço que prestamos, mas sim no nosso modelo de entrega. A forma como entregamos esta solução é a inovação que os empreendedores precisam, e que nós estamos dispostos a entregar."</p>
-        </div>
-    </section>
-
-    <!-- FAQS SECTION -->
-    <section id="faq" class="section-padding reveal" style="border-top: 1px solid var(--border); background: #080a11;">
-        <div class="container" style="max-width: 800px;">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <span class="badge">Dúvidas Frequentes</span>
-                <h2>Perguntas Frequentes</h2>
-                <p style="color: var(--text-dim);">Tudo o que precisa de saber sobre o nosso modelo e funcionamento.</p>
-            </div>
-
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Como é que a Geretrix previne a falta de liquidez na minha empresa?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Utilizamos sistemas de gatilhos orientados por dados (Data-Driven Trigger Systems) que analisam em tempo real o fluxo de caixa, as faturas e os prazos de recebimento, alertando-o antes que os problemas de liquidez aconteçam.</p>
+                <div class="pricing-grid">
+                    <!-- START -->
+                    <div class="price-card featured reveal">
+                        <div class="plan-notice urgent">Acaba brevemente. Última oportunidade de ter acesso ao serviço pelo preço de abertura, usufruindo de todos os restantes serviços do plano Scale pelo preço do plano Start, quando este for lançado.</div>
+                        <h3>Start</h3>
+                        <p style="color: var(--text-dim); font-size: 0.85rem;">Pre-seed & Seed</p>
+                        <div class="price-tag">799€<span>/mês</span></div>
+                        <ul class="feature-list">
+                            <li style="color: #fff; font-weight: 700;">Módulo DLI (Liquidez) Ativo</li>
+                            <li>Gestão Preditiva de Tesouraria</li>
+                            <li>Trigger System Data-Driven</li>
+                            <li>Dashboards de Decisão em Tempo Real</li>
+                            <li>Acompanhamento de Especialista</li>
+                        </ul>
+                        <a href="#contato" class="btn btn-primary">Garantir Preço de Abertura</a>
                     </div>
-                </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Preciso de mudar o meu software de faturação atual?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Não, os nossos sistemas integram-se diretamente com os principais softwares do mercado através de APIs robustas ou importação segura, sem interromper as suas operações diárias.</p>
+                    <!-- SCALE -->
+                    <div class="price-card unavailable reveal" aria-disabled="true">
+                        <div class="coming-soon">ABRE BREVEMENTE</div>
+                        <h3>Scale</h3>
+                        <p style="color: var(--text-dim); font-size: 0.85rem;">Series A & Growth</p>
+                        <div class="price-tag">1850€<span>/mês</span></div>
+                        <ul class="feature-list">
+                            <li>Módulo DLI (gestão diária do fluxo de caixa)</li>
+                            <li>Protocolo SSS (Corte de Custos)</li>
+                            <li>CFO Estratégico Tech-Enabled</li>
+                            <li>Módulo NCS (Fundos Não Dilutivos)</li>
+                            <li>Due Diligence Automatizada</li>
+                        </ul>
+                        <button type="button" class="btn btn-secondary" disabled>Em Breve</button>
                     </div>
-                </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>O que é o Módulo DLI (Liquidez) incluído no plano Start?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>O Módulo DLI é a nossa tecnologia proprietária para o controlo diário e projeção contínua do fluxo de caixa. Permite monitorizar entradas e saídas futuras e tomar decisões estratégicas com base em dados preditivos concretos.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Como funciona o plano Equity Partner para startups?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Para startups com alto potencial mas pouca liquidez inicial, oferecemos acesso total ao nosso ecossistema reduzindo substancialmente a mensalidade em troca de uma pequena percentagem de capital social (equity) da empresa.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Tenho apoio de especialistas reais ou apenas de software?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Acreditamos na combinação perfeita entre tecnologia e inteligência humana. Terá acesso aos nossos dashboards automatizados, mas sempre com o acompanhamento e análise crítica de um especialista financeiro dedicado.</p>
+                    <!-- PARTNER -->
+                    <div class="price-card reveal">
+                        <h3>Equity Partner</h3>
+                        <p style="color: var(--text-dim); font-size: 0.85rem;">High Impact Startups</p>
+                        <div class="price-tag">Equity<span>/Success</span></div>
+                        <ul class="feature-list">
+                            <li>Uma forma de acesso à totalidade dos nossos serviços para empresas em fases iniciais, com poucas margens financeiras e com um grande potencial de crescimento, realizando-se o pagamento de uma subscrição base bastante mais baixa (a estipular), através da transferência de uma pequena parcela do capital social da empresa (também a estipular) para o nome da nossa sociedade</li>
+                            <li>Alinhamento Total de Interesses</li>
+                        </ul>
+                        <a href="#contato" class="btn btn-secondary">Candidatar Startup</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CONTACT / DIAGNOSIS -->
-    <section id="contato" class="contact-section">
-        <div class="container">
-            <div class="reveal" style="text-align: center;">
-                <span class="badge">Ação Imediata</span>
-                <h2>Faça já o Diagnóstico Financeiro da sua Empresa</h2>
-                <p style="color: var(--text-dim);">Agende uma conversa de 15 minutos e descubra as vulnerabilidades financeira da sua empresa.</p>
-                
-                <form class="contact-form">
-                    <input type="text" name="Nome" placeholder="Nome Completo" required>
-                    <input type="email" name="E-mail" placeholder="E-mail Profissional" required>
-                    <input type="text" name="Empresa" placeholder="Nome da Empresa / Startup" required>
-                    <textarea name="Desafio" rows="4" placeholder="Qual o maior desafio do seu fluxo de caixa hoje?"></textarea>
-                    <button type="submit" class="btn btn-primary">Solicitar Diagnóstico Gratuito</button>
-                </form>
+        <!-- MANIFESTO -->
+        <section class="manifesto reveal">
+            <div class="container">
+                <p class="manifesto-text">"A inovação do nosso serviço não se encontra no serviço que prestamos, mas sim no nosso modelo de entrega. A forma como entregamos esta solução é a inovação que os empreendedores precisam, e que nós estamos dispostos a entregar."</p>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- FAQS SECTION -->
+        <section id="faq" class="section-padding reveal" style="border-top: 1px solid var(--border); background: #080a11;">
+            <div class="container" style="max-width: 800px;">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <span class="badge">Dúvidas Frequentes</span>
+                    <h2>Perguntas Frequentes</h2>
+                    <p style="color: var(--text-dim);">Tudo o que precisa de saber sobre o nosso modelo e funcionamento.</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Como é que a Geretrix previne a falta de liquidez na minha empresa?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Utilizamos sistemas de gatilhos orientados por dados (Data-Driven Trigger Systems) que analisam em tempo real o fluxo de caixa, as faturas e os prazos de recebimento, alertando-o antes que os problemas de liquidez aconteçam.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Preciso de mudar o meu software de faturação atual?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Não, os nossos sistemas integram-se diretamente com os principais softwares do mercado através de APIs robustas ou importação segura, sem interromper as suas operações diárias.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>O que é o Módulo DLI (Liquidez) incluído no plano Start?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>O Módulo DLI é a nossa tecnologia proprietária para o controlo diário e projeção contínua do fluxo de caixa. Permite monitorizar entradas e saídas futuras e tomar decisões estratégicas com base em dados preditivos concretos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Como funciona o plano Equity Partner para startups?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Para startups com alto potencial mas pouca liquidez inicial, oferecemos acesso total ao nosso ecossistema reduzindo substancialmente a mensalidade em troca de uma pequena percentagem de capital social (equity) da empresa.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Tenho apoio de especialistas reais ou apenas de software?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Acreditamos na combinação perfeita entre tecnologia e inteligência humana. Terá acesso aos nossos dashboards automatizados, mas sempre com o acompanhamento e análise crítica de um especialista financeiro dedicado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT / DIAGNOSIS -->
+        <section id="contato" class="contact-section">
+            <div class="container">
+                <div class="reveal" style="text-align: center;">
+                    <span class="badge">Ação Imediata</span>
+                    <h2>Faça já o Diagnóstico Financeiro da sua Empresa</h2>
+                    <p style="color: var(--text-dim);">Agende uma conversa de 15 minutos e descubra as vulnerabilidades financeiras da sua empresa.</p>
+                    
+                    <form class="contact-form">
+                        <input type="text" name="Nome" placeholder="Nome Completo" aria-label="Nome Completo" autocomplete="name" required>
+                        <input type="email" name="E-mail" placeholder="E-mail Profissional" aria-label="E-mail Profissional" autocomplete="email" required>
+                        <input type="text" name="Empresa" placeholder="Nome da Empresa / Startup" aria-label="Nome da Empresa ou Startup" autocomplete="organization" required>
+                        <textarea name="Desafio" rows="4" placeholder="Qual o maior desafio do seu fluxo de caixa hoje?" aria-label="Qual o maior desafio do seu fluxo de caixa hoje?"></textarea>
+                        <button type="submit" class="btn btn-primary">Solicitar Diagnóstico Gratuito</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
             <div class="logo" style="margin-bottom: 2rem;">GERE<span>TRIX</span></div>
             <p>&copy; 2026 Geretrix. Todos os direitos reservados. Gestão Financeira para Empreendedores.</p>
             <div style="margin-top: 1rem;">
-                <a href="https://joao-monteiro-7.github.io/termos-utilizacao-geretrix/" style="color: var(--text-dim); text-decoration: underline; margin: 0 10px;">Termos de Utilização</a>
-                <a href="https://joao-monteiro-7.github.io/politica-privacidade-geretrix/" style="color: var(--text-dim); text-decoration: underline; margin: 0 10px;">Política de Privacidade</a>
+                <a href="https://joao-monteiro-7.github.io/termos-utilizacao-geretrix/" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim); text-decoration: underline; margin: 0 10px;">Termos de Utilização</a>
+                <a href="https://joao-monteiro-7.github.io/politica-privacidade-geretrix/" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim); text-decoration: underline; margin: 0 10px;">Política de Privacidade</a>
             </div>
         </div>
     </footer>
+
+    <!-- COOKIE CONSENT BANNER (RGPD) -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Consentimento de Cookies">
+        <div class="cookie-text">
+            Utilizamos cookies essenciais e analíticos para otimizar a experiência e analisar o tráfego da plataforma, em conformidade com o RGPD. Consulte a nossa <a href="https://joao-monteiro-7.github.io/politica-privacidade-geretrix/" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>.
+        </div>
+        <div class="cookie-actions">
+            <button type="button" id="cookie-reject" class="btn-cookie btn-cookie-reject">Apenas Essenciais</button>
+            <button type="button" id="cookie-accept" class="btn-cookie btn-cookie-accept">Aceitar Todos</button>
+        </div>
+    </div>
 
     <script>
 function runSimulation() {
@@ -529,7 +627,7 @@ function runSimulation() {
                 statusText = 'OPERAÇÃO NORMAL';
                 statusStyle = 'background-color: #10b981; color: #ffffff; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px; display: inline-block; min-width: 140px; text-align: center; text-transform: uppercase;';
             } 
-            // [REGRA 2] Entre 3 e 6.99 meses restantes -> PLANO DE CRISE a fundo amarelo
+            // [REGRA 2] Entre 3 e 6.99 meses restantes -> PLANO DE PREVENÇÃO a fundo amarelo
             else if (monthlyRunway >= 3) {
                 statusText = 'PLANO DE PREVENÇÃO';
                 statusStyle = 'background-color: #f59e0b; color: #ffffff; padding: 6px 14px; border-radius: 9999px; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.5px; display: inline-block; min-width: 140px; text-align: center; text-transform: uppercase;';
@@ -547,7 +645,7 @@ function runSimulation() {
 
         // Injetar a linha estruturada na tabela seguindo o design do teu dashboard
         simBody.innerHTML += `
-            <tr style="border-b: 1px solid rgba(255,255,255,0.05);">
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                 <td style="padding: 14px 8px; color: #94a3b8;">Mês ${m}</td>
                 <td style="padding: 14px 8px; color: ${monthlyNet > 0 ? '#f87171' : '#34d399'}; font-weight: 500;">${burnNetDisplay}</td>
                 <td style="padding: 14px 8px; color: #f1f5f9; font-weight: 500;">${balanceDisplay}</td>
@@ -563,8 +661,44 @@ const calculate = runSimulation;
 // Inicializar automaticamente o simulador assim que a página abre
 window.onload = runSimulation;
 
+// Função para inicializar Analytics apenas após consentimento explícito (RGPD)
+function initAnalytics() {
+    window.geretrixAnalyticsEnabled = true;
+    // Caso adiciones Google Analytics (GA4) ou Microsoft Clarity no futuro,
+    // coloca o script de inicialização aqui para garantir conformidade RGPD.
+}
+
 // Envio do formulário de contacto por e-mail (FormSubmit AJAX) e outras funcionalidades interativas
 document.addEventListener('DOMContentLoaded', function() {
+    // --- GESTÃO DE CONSENTIMENTO DE COOKIES (RGPD) ---
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesBtn = document.getElementById('cookie-accept');
+    const rejectCookiesBtn = document.getElementById('cookie-reject');
+    const savedConsent = localStorage.getItem('geretrix_cookie_consent');
+
+    if (!savedConsent && cookieBanner) {
+        setTimeout(function() {
+            cookieBanner.classList.add('show');
+        }, 600);
+    } else if (savedConsent === 'accepted') {
+        initAnalytics();
+    }
+
+    if (acceptCookiesBtn) {
+        acceptCookiesBtn.addEventListener('click', function() {
+            localStorage.setItem('geretrix_cookie_consent', 'accepted');
+            cookieBanner.classList.remove('show');
+            initAnalytics();
+        });
+    }
+
+    if (rejectCookiesBtn) {
+        rejectCookiesBtn.addEventListener('click', function() {
+            localStorage.setItem('geretrix_cookie_consent', 'essential_only');
+            cookieBanner.classList.remove('show');
+        });
+    }
+
     // --- SMART STICKY HEADER ---
     let lastScrollTop = 0;
     const navbar = document.querySelector('nav');
@@ -637,6 +771,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.faq-item').forEach(function(item) {
                 if (item !== faqItem) {
                     item.classList.remove('open');
+                    const btn = item.querySelector('.faq-question');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
                     const answer = item.querySelector('.faq-answer');
                     if (answer) answer.style.maxHeight = null;
                 }
@@ -644,9 +780,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (isOpen) {
                 faqItem.classList.remove('open');
+                question.setAttribute('aria-expanded', 'false');
                 faqAnswer.style.maxHeight = null;
             } else {
                 faqItem.classList.add('open');
+                question.setAttribute('aria-expanded', 'true');
                 faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
             }
         });
@@ -675,7 +813,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data['_subject'] = 'Novo Diagnóstico Solicitado - Geretrix';
             data['_captcha'] = 'false';
 
-            fetch('https://formsubmit.co/069cb224e08201e5b3f33b0a5281f7ba', {
+            fetch('https://formsubmit.co/ajax/069cb224e08201e5b3f33b0a5281f7ba', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -172,25 +172,57 @@
         .stat-large { font-size: 5rem; font-weight: 800; color: var(--danger); line-height: 1; }
         .stat-source { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; margin-top: 1rem; opacity: 0.6; }
 
-        /* --- PRICING --- */
-        .pricing-section { padding: 8rem 0; background: #080a11; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 4rem; }
-        .price-card { background: var(--card-bg); padding: 3.5rem 2.5rem; border-radius: 28px; border: 1px solid var(--border); text-align: center; transition: all 0.4s; display: flex; flex-direction: column; }
-        .price-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .price-card.featured { border-color: var(--primary); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%); }
+        /* --- PRICING HORIZONTAL CAROUSEL & PLANS --- */
+        .pricing-section { padding: 8rem 0; background: #080a11; position: relative; }
+        .pricing-wrapper { position: relative; margin-top: 2rem; padding-top: 15px; }
+        .pricing-grid { 
+            display: flex; 
+            gap: 2rem; 
+            overflow-x: auto; 
+            overflow-y: visible;
+            scroll-snap-type: x mandatory; 
+            scroll-behavior: smooth; 
+            padding: 10px 0 2rem 0;
+            scrollbar-width: none; 
+        }
+        .pricing-grid::-webkit-scrollbar { display: none; }
+        .price-card { 
+            flex: 0 0 calc(33.333% - 1.34rem); 
+            min-width: 330px;
+            max-width: 380px;
+            background: var(--card-bg); 
+            padding: 3rem 2.2rem; 
+            border-radius: 28px; 
+            border: 1px solid var(--border); 
+            text-align: left; 
+            transition: all 0.4s; 
+            display: flex; 
+            flex-direction: column; 
+            scroll-snap-align: start;
+        }
+        .price-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .price-card.featured { border-color: var(--primary); background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--card-bg) 100%); }
         
-        .price-tag { font-size: 3.5rem; font-weight: 800; color: #fff; margin: 2rem 0; }
+        .price-tag { font-size: 3rem; font-weight: 800; color: #fff; margin: 1.5rem 0; text-align: center; }
         .price-tag span { font-size: 1.1rem; color: var(--text-dim); font-weight: 400; }
         
-        .plan-notice { background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 12px; font-size: 0.8rem; color: var(--primary); font-weight: 600; line-height: 1.4; margin-bottom: 2rem; }
+        .plan-notice { background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 12px; font-size: 0.8rem; color: var(--primary); font-weight: 600; line-height: 1.4; margin-bottom: 2rem; text-align: center; }
         .plan-notice.urgent { color: #f59e0b; background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.1); }
         
-        .feature-list { list-style: none; margin: 0 0 3rem 0; text-align: left; flex-grow: 1; }
-        .feature-list li { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; color: var(--text-dim); font-size: 0.95rem; }
-        .feature-list li::before { content: '✓'; color: var(--primary); font-weight: 900; }
+        .feature-list { list-style: none; margin: 0 0 1.5rem 0; text-align: left; }
+        .feature-list li { margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 0.8rem; color: var(--text-dim); font-size: 0.9rem; line-height: 1.4; }
+        .feature-list li::before { content: '✓'; color: var(--primary); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
 
-        .unavailable { opacity: 0.5; filter: grayscale(0.8); cursor: not-allowed; }
-        .coming-soon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); background: var(--secondary); color: #fff; padding: 0.5rem 1.5rem; border-radius: 8px; font-weight: 800; z-index: 10; pointer-events: none; }
+        .plan-section-label { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-top: 1.2rem; margin-bottom: 0.4rem; }
+        .plan-desc-text { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5; }
+
+        @media (max-width: 968px) {
+            h1 { font-size: 2.5rem; }
+            .pricing-grid, .sim-grid, .stats-grid { grid-template-columns: 1fr; }
+            .price-card { flex: 0 0 85vw; min-width: 85vw; }
+            .sim-controls { border-right: none; border-bottom: 1px solid var(--border); }
+            .manifesto-text { font-size: 1.5rem; }
+        }
 
         /* --- INNOVATION MANIFESTO --- */
         .manifesto { padding: 10rem 0; text-align: center; background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%); }
@@ -329,54 +361,119 @@
     <!-- PRICING PLANS -->
     <section id="planos" class="pricing-section">
         <div class="container">
-            <div class="reveal" style="text-align: center; margin-bottom: 4rem;">
+            <div class="reveal" style="text-align: center; margin-bottom: 2rem;">
                 <h2>Soluções para a sua empresa</h2>
                 <p style="color: var(--text-dim); font-size: 1.2rem;">O problema de cash-flow que pretendemos resolver é real e verifica-se numa grande quantidade de empresas. <span style="color: #fff; font-weight: 700;">Deixe-nos ajudá-lo.</span></p>
             </div>
 
-            <div class="pricing-grid">
-                <!-- START -->
-                <div class="price-card featured reveal">
-                    <div class="plan-notice urgent">Acaba brevemente. Última oportunidade de ter acesso ao serviço pelo preço de abertura, usufruindo de todos os restantes serviços do plano Scale pelo preço do plano Start, quando este for lançado.</div>
-                    <h3>Start</h3>
-                    <p style="color: var(--text-dim); font-size: 0.85rem;">Pre-seed & Seed</p>
-                    <div class="price-tag">799€<span>/mês</span></div>
-                    <ul class="feature-list">
-                        <li style="color: #fff; font-weight: 700;">Módulo DLI (Liquidez) Ativo</li>
-                        <li>Gestão Preditiva de Tesouraria</li>
-                        <li>Trigger System Data-Driven</li>
-                        <li>Dashboards de Decisão em Tempo Real</li>
-                        <li>Acompanhamento de Especialista</li>
-                    </ul>
-                    <a href="#contato" class="btn btn-primary">Garantir Preço de Abertura</a>
-                </div>
+            <!-- PRICING CONTROLS / ARROWS (Minimalist, no circles) -->
+            <div class="reveal" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1rem; gap: 1.5rem;">
+                <button onclick="scrollPricing(-1)" id="pricing-prev-btn" title="Anterior" style="background: none; border: none; color: var(--text-main); font-size: 1.8rem; cursor: pointer; transition: color 0.3s; padding: 0.2rem;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-main)'">←</button>
+                <button onclick="scrollPricing(1)" id="pricing-next-btn" title="Seguinte" style="background: none; border: none; color: var(--text-main); font-size: 1.8rem; cursor: pointer; transition: color 0.3s; padding: 0.2rem;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-main)'">→</button>
+            </div>
 
-                <!-- SCALE -->
-                <div class="price-card unavailable reveal">
-                    <div class="coming-soon">ABRE BREVEMENTE</div>
-                    <h3>Scale</h3>
-                    <p style="color: var(--text-dim); font-size: 0.85rem;">Series A & Growth</p>
-                    <div class="price-tag">1850€<span>/mês</span></div>
-                    <ul class="feature-list">
-			<li>Módulo DLI (gestão diária do fluxo de caixa)</li>
-                        <li>Protocolo SSS (Corte de Custos)</li>
-                        <li>CFO Estratégico Tech-Enabled</li>
-                        <li>Módulo NCS (Fundos Não Dilutivos)</li>
-                        <li>Due Diligence Automatizada</li>
-                    </ul>
-                    <a href="#" class="btn btn-secondary">Em Breve</a>
-                </div>
+            <div class="pricing-wrapper reveal">
+                <div class="pricing-grid" id="pricing-grid">
+                    
+                    <!-- 1. START (Button with blue/green gradient highlight) -->
+                    <div class="price-card">
+                        <h3 style="font-size: 1.8rem; color: #fff; font-weight: 800;">Start</h3>
+                        <p style="color: var(--text-dim); font-size: 0.85rem; font-weight: 600; margin-top: 0.2rem;">Plano Base</p>
+                        <div class="price-tag">99€<span>/mês</span></div>
+                        
+                        <div class="plan-section-label">Funcionalidades Ativas:</div>
+                        <ul class="feature-list">
+                            <li>Módulo DLI (Liquidez) Ativo</li>
+                            <li>Gestão Preditiva de Tesouraria</li>
+                            <li>Data-Driven Trigger System</li>
+                            <li>Dashboards de Decisão em Tempo Real</li>
+                        </ul>
 
-                <!-- PARTNER -->
-                <div class="price-card reveal">
-                    <h3>Equity Partner</h3>
-                    <p style="color: var(--text-dim); font-size: 0.85rem;">High Impact Startups</p>
-                    <div class="price-tag">Equity<span>/Success</span></div>
-                    <ul class="feature-list">
-                        <li>Uma forma de acesso à totalidade dos nossos serviços para empresas em fases iniciais, com poucas margens financeiras e com um grande potencial de crescimento, realizando-se o pagamento de uma subscrição base bastante mais baixa (a estipular), através da transferência de uma pequena parcela do capital social da empresa (também a estipular) para o nome da nossa sociedade</li>
-                        <li>Alinhamento Total de Interesses</li>
-                    </ul>
-                    <a href="#contato" class="btn btn-secondary">Candidatar Startup</a>
+                        <div class="plan-section-label">Ótimo para:</div>
+                        <p class="plan-desc-text">Empresas que já tenham um departamento financeiro consolidado.</p>
+
+                        <div class="plan-section-label">Vantagens que traz:</div>
+                        <ul class="feature-list" style="margin-bottom: 2.5rem; flex-grow: 1;">
+                            <li>Maior organização e previsibilidade no trabalho</li>
+                            <li>Monitorização constante de tesouraria por um agente autónomo</li>
+                            <li>Horas de trabalho em tarefas repetitivas e cansativas poupadas</li>
+                            <li>Aumento da disponibilidade dos trabalhadores da empresa para tarefas mais importantes</li>
+                        </ul>
+                        <a href="https://joao-monteiro-7.github.io/geretrix-questionario-seletivo/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; text-align: center;">Descubra todas as funcionalidades da Geretrix</a>
+                    </div>
+
+                    <!-- 2. SCALE (Highlighted green card, secondary button) -->
+                    <div class="price-card featured">
+                        <h3 style="font-size: 1.8rem; color: #fff; font-weight: 800;">Scale</h3>
+                        <p style="color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-top: 0.2rem;">Plano Profissional</p>
+                        <div class="price-tag">799€<span>/mês</span></div>
+                        
+                        <div class="plan-section-label">Funcionalidades Ativas:</div>
+                        <ul class="feature-list">
+                            <li>Acompanhamento e monitorização constante de CFO Geretrix</li>
+                            <li>Integração do Software com o Apoio de um especialista financeiro</li>
+                            <li>Agendamento de reuniões com o CFO sempre que a Geretrix ou o cliente achar necessário</li>
+                        </ul>
+
+                        <div class="plan-section-label">Ótimo para:</div>
+                        <p class="plan-desc-text">Empresas em fase Seed, Series A e B; empresas que precisam de um profissional a gerir as finanças mas não têm capital para pagar a um gestor financeiro a tempo inteiro.</p>
+
+                        <div class="plan-section-label">Vantagens que traz:</div>
+                        <ul class="feature-list" style="margin-bottom: 2.5rem; flex-grow: 1;">
+                            <li>Opção mais barata e com o mesmo efeito que um CFO a tempo inteiro</li>
+                            <li>Dashboard interativo integrado com todas as funcionalidades e integrações do Plano Start</li>
+                            <li>Interação de um profissional da Geretrix que faz a ponte entre o software e a empresa</li>
+                        </ul>
+                        <a href="https://joao-monteiro-7.github.io/geretrix-questionario-seletivo/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%; text-align: center;">Garantir Plano Scale</a>
+                    </div>
+
+                    <!-- 3. SCALE PLUS -->
+                    <div class="price-card">
+                        <h3 style="font-size: 1.8rem; color: #fff; font-weight: 800;">Scale Plus</h3>
+                        <p style="color: var(--text-dim); font-size: 0.85rem; font-weight: 600; margin-top: 0.2rem;">Plano Enterprise</p>
+                        <div class="price-tag">999€<span>/mês</span></div>
+                        
+                        <div class="plan-section-label">Funcionalidades Ativas:</div>
+                        <ul class="feature-list">
+                            <li>Todas as vantagens do Plano Scale + normalização contabilística</li>
+                        </ul>
+
+                        <div class="plan-section-label">Ótimo para:</div>
+                        <p class="plan-desc-text">Empresas que não tenham um departamento financeiro estruturado e queiram ter uma normalização contabilística ao final do mês melhor estruturada; startups, micro e pequenas empresas.</p>
+
+                        <div class="plan-section-label">Vantagens:</div>
+                        <ul class="feature-list" style="margin-bottom: 2.5rem; flex-grow: 1;">
+                            <li>Integração 3 em 1 - software de monitorização constante de fluxo de caixa, gestão e acompanhamento financeiro, revisão e normalização contabilística</li>
+                            <li>Funcionamento pleno do sistema Geretrix</li>
+                            <li>O fundador ou CEO da empresa ou startup não precisa de se preocupar com qualquer questão financeira ou contabilística - a Geretrix trata de tudo</li>
+                        </ul>
+                        <a href="https://joao-monteiro-7.github.io/geretrix-questionario-seletivo/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%; text-align: center;">Aderir ao Plano Enterprise</a>
+                    </div>
+
+                    <!-- 4. PLANO EQUITY -->
+                    <div class="price-card featured">
+                        <h3 style="font-size: 1.8rem; color: #fff; font-weight: 800;">Plano Equity</h3>
+                        <p style="color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-top: 0.2rem;">High Impact Startups</p>
+                        <div class="price-tag" style="font-size: 2.5rem;">Equity<span>/Success</span></div>
+                        
+                        <div class="plan-section-label">Funcionalidades Ativas:</div>
+                        <ul class="feature-list">
+                            <li>Uma forma de acesso à totalidade dos nossos serviços para empresas em fases iniciais, com poucas margens financeiras e com um grande potencial de crescimento</li>
+                            <li>Pagamento de subscrição base bastante mais baixa (a estipular) através da transferência de uma pequena parcela do capital social</li>
+                            <li>Alinhamento Total de Interesses</li>
+                        </ul>
+
+                        <div class="plan-section-label">Ótimo para:</div>
+                        <p class="plan-desc-text">Startups em fase inicial com elevado potencial de crescimento que necessitam de suporte financeiro completo sem pressão de liquidez imediata.</p>
+
+                        <div class="plan-section-label">Vantagens:</div>
+                        <ul class="feature-list" style="margin-bottom: 2.5rem; flex-grow: 1;">
+                            <li>Parceria estratégica de longo prazo</li>
+                            <li>Acesso total ao ecossistema Geretrix sem comprometer o caixa</li>
+                        </ul>
+                        <a href="https://joao-monteiro-7.github.io/geretrix-questionario-seletivo/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%; text-align: center;">Candidatar Startup</a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -716,6 +813,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Função para scroll horizontal dos planos de preço
+function scrollPricing(direction) {
+    const grid = document.getElementById('pricing-grid');
+    if (!grid) return;
+    const card = grid.querySelector('.price-card');
+    if (!card) return;
+    const scrollAmount = card.offsetWidth + 32; // card width + gap (2rem = 32px)
+    grid.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+}
 </script>
 </body>
 </html>
